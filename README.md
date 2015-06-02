@@ -1,10 +1,10 @@
-# SpringWS
+# Eat Decide base on Spring WS
 
 ##Linux env
 
   * Clone project
    <br />
- $ git clone https://github.com/cihm/SpringWS.git 
+ $ git clone https://github.com/cihm/EatingDecide.git 
    <br />
   * Modify your deploy path
    <br />
@@ -21,7 +21,7 @@
 
  * Clone project
  <br />
-  $ git clone https://github.com/cihm/SpringWS.git 
+  $ git clone https://github.com/cihm/EatingDecide.git
  <br />
  * Modify your deploy path
   <br />
