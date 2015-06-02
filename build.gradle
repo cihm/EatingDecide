@@ -1,0 +1,61 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+// Uses JDK 7
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+// 1. Get dependencies from Maven local repository
+// 2. Get dependencies from Maven central repository
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+
+war {
+    baseName = 'JavaSpringMVC'
+
+    from('src/main/java') {
+        include '*.properties'
+        into ('WEB-INF/classes')
+    }
+}
+
+task deploy (type: Copy, dependsOn: clean) {
+    from war
+    println "${tomcat_home}"
+    into "${tomcat_home}/webapps"
+    //into "/opt/apache-tomcat-7.0.61/webapps"
+}
+
+
+//Project dependencies
+dependencies {
+	compile 'ch.qos.logback:logback-classic:1.1.2'
+	compile 'org.springframework:spring-framework-bom:4.0.0.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
+	
+   // compile 'org.springframework:spring-aspects:4.0.0.RELEASE'
+
+	
+	
+	compile 'jstl:jstl:1.2'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.0.0'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.0.0'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.0.0'
+
+	
+	//include in compile only, exclude in the war
+	providedCompile 'javax.servlet:servlet-api:2.5'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+} 
+
+tasks.withType(JavaCompile){
+	options.encoding="UTF-8"
+  options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+}
