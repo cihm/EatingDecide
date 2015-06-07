@@ -1,4 +1,4 @@
-package com.cihm.controller;
+package com.cihm.sample_controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,17 +20,17 @@ public class HellowWorldController {
  
 	private static final Logger logger = LoggerFactory.getLogger(HellowWorldController.class);
  
-	//this controller is directly return homepage
-	@RequestMapping(value = { "/", "/welcome**" })
-	public ModelAndView login() {
- 
-		System.out.println("lllllgggggiiiinnn");
-		ModelAndView model = new ModelAndView();
-		model.setViewName("login.jsp");
- 
-		return model;
- 
-	}
+//	//this controller is directly return homepage
+//	@RequestMapping(value = { "/", "/welcome**" })
+//	public ModelAndView login() {
+// 
+//		System.out.println("lllllgggggiiiinnn");
+//		ModelAndView model = new ModelAndView();
+//		model.setViewName("login.jsp");
+// 
+//		return model;
+// 
+//	}
 	
 	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
 	public ModelAndView welcome(@PathVariable("name") String name) {
