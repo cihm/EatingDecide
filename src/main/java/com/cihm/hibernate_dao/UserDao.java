@@ -65,27 +65,31 @@ public class UserDao {
 			session.beginTransaction();
 
 			Query query = session
-					.createQuery("from AccountVo where name = :name");
+					.createQuery("from AccountVo where name = :name OR email = :email");
 			query.setParameter("name", accountVo.getName());
+			query.setParameter("email", accountVo.getEmail());
 
 			List<?> list = query.list();
 			System.out.println("size"+list.size());
 			AccountVo queryAccount = (AccountVo) list.get(0);
 			
+			if(list.size()>0){
+				status = UserInfoController.return_success;
+			}else{
+				status = UserInfoController.return_fail;
+			}
+			
 			
 			System.out.println("hihihi"+queryAccount.getUser_id());
 			
 			session.getTransaction().commit();
-			status = UserInfoController.return_success;
+			
 		} catch (Exception e) {
 			status=UserInfoController.return_fail;
 		} finally {
 			session.close();
 		}
 
-		// HibernateUtil.checkData("select * from grouptable");
-		// HibernateUtil.checkData("select * from story");
-		
 		return status;
 
 	}
